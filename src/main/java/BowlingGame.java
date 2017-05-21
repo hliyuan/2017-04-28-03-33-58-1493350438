@@ -7,7 +7,7 @@ public class BowlingGame {
      *
      *
      * */
-    public static int getBowlingScore(String bowlingCode) {
+    public int getBowlingScore(String bowlingCode) {
         String[] arr = new String[11];
         String[] lastframe = bowlingCode.split("\\|\\|");
         if(lastframe.length==1)
@@ -28,7 +28,9 @@ public class BowlingGame {
                     if (next1score[0] == 10) {
                         int[] next2score = getScoresPerFrame(arr[i+2]);
                         sum += score[0] + next1score[0] + next2score[0];
-                    } else {
+                    } else if (next1score[1] == 10)  {
+                        sum += score[0] + next1score[1];
+                    }else{
                         sum += score[0] + next1score[0] + next1score[1];
                     }
                 }else {
@@ -46,7 +48,7 @@ public class BowlingGame {
         return sum;
     }
 
-    public static int[] getScoresPerFrame(String target){
+    public int[] getScoresPerFrame(String target){
         int score[] = {0,0};
         if(target.equals("")||target.isEmpty()) return score;
         char [] arr = target.toCharArray();
